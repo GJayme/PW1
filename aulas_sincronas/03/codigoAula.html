@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aula 02/07/2020 - Introdução ao jQuery</title>
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+    >
+      // NÃO DIGITAR CODIGO JS AQUI
+    </script>
+    <script>
+      // Formato básico Jquery
+      // $(SELETOR).algo();
+
+      // $(document).ready() faz a mesma função que o window.onload
+      $(document).ready(function () {
+        $("button"); // Seletor por TAG
+        $(".vermelho"); // Seletor por Classe
+        $("#primeiro"); // Seletor por ID
+        $("div p"); // (combinador) Seleciona todos os p que estao dentro de div
+        $("div[id]"); // Pega a div que tenha id de atributo
+        $("[name=teste]"); // Seleciona todos os campos que tenha nome como teste
+        $("div p:first-child"); // Seleciona o primeiro p da div
+
+        console.log("Numero de botoes " + $("button").length);
+        console.log($("button").get(0)); // pegando elementos específicos
+        console.log($("button").get(1));
+        console.log($("button").first());
+        console.log($("button").last());
+
+        $("button").click(function () {
+          alert("Eae !");
+        });
+
+        $(document).on("click", "button", function (e) {
+          let elemento = e.target; // Selecionando o elemento clicado
+          console.log($(this));
+        });
+
+        $(document).on("click", "button", function () {
+          // document.getElementsByTagName("p")[0].style.color = "red";
+          $("p").first().css("color", "red");
+
+          // getComputedStyle(elemento)["font-size"];
+          console.log($("p").css("font-size"));
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <button>Botão 1</button>
+    <button>Botão 2</button>
+    <button>Botão 3</button>
+    <button>Botão 4</button>
+    <p>
+      Mussum Ipsum, cacilds vidis litro abertis. Mauris nec dolor in eros
+      commodo tempor. Aenean aliquam molestie leo, vitae iaculis nisl. Praesent
+      malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate
+      dapibus. Paisis, filhis, espiritis santis. Suco de cevadiss, é um leite
+      divinis, qui tem lupuliz, matis, aguis e fermentis.
+    </p>
+  </body>
+</html>

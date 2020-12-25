@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    /
+    <title>Página de exemplo</title>
+  </head>
+  <body>
+    <h1>
+      Título de exemplo
+    </h1>
+    <p>Este é um<i> simples </i>exemplo</p>
+    <p>Um paragrafo de texto de exemplo</p>
+    <p>chanana</p>
+    <script type="text/javascript">
+      window.onload = function() {
+        document.getElementsByTagName("p")[1].onclick = function() {
+          alert("Cliquei no parágrafo!");
+        };
+      };
+      document.getElementsByTagName("p")[2] = function() {
+        addEventListener("click", exibirMenssagem);
+      };
+    </script>
+  </body>
+</html>

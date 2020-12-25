@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <title>Boletim</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <style>
+      td,
+      th {
+        text-align: center !important;
+      }
+
+      tfoot tr {
+        background-color: lightgray;
+        font-weight: bold;
+      }
+
+      label,
+      input,
+      button {
+        display: block;
+      }
+
+      label,
+      input {
+        width: 100%;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      form {
+        width: 350px;
+      }
+
+      table,
+      form,
+      button {
+        margin: auto;
+      }
+
+      button {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        //Variáveis iniciais:
+        let note1Show = 0;
+        let note2Show = 0;
+        let sumNote1 = 0;
+        let sumNote2 = 0;
+        let sumMedia1 = 0;
+        let sumMedia2 = 0;
+        let sumMediaTotal = 0;
+        let media = 0;
+        let mediaShow = 0;
+        let mediaTotal = 0;
+        let count = 0;
+        let aprovados = 0;
+        let countTfoot = 0;
+
+        //Quando clicar no botão de enviar:
+        document.getElementsByTagName("button")[0].onclick = () => {
+          count += 1;
+
+          //Pegando o nome:
+          let name = document.getElementsByTagName("input")[0].value;
+
+          //Pengado a note1 e fazendo tratamento no valor:
+          let note1 = parseFloat(
+            document.getElementsByTagName("input")[1].value
+          );
+          note1Show = note1.toFixed(1);
+          sumNote1 += note1;
+          sumMedia1 = (sumNote1 / count).toFixed(1);
+
+          //Pengado a note2 e fazendo tratamento no valor:
+          let note2 = parseFloat(
+            document.getElementsByTagName("input")[2].value
+          );
+          note2Show = note2.toFixed(1);
+          sumNote2 += note2;
+          sumMedia2 = (sumNote2 / count).toFixed(1);
+
+          //Pegando as medias:
+          media = (note1 + note2) / 2;
+          mediaShow = media.toFixed(1);
+          sumMediaTotal += media;
+          mediaTotal = (sumMediaTotal / count).toFixed(1);
+
+          //Pegando situacao:
+          let situacao = "";
+          if (media >= 6) {
+            situacao = "Aprovado";
+            aprovados += 1;
+          } else {
+            situacao = "Reprovado";
+          }
+
+          // Validações
+          if (name === "" || note1Show === "NaN" || note2Show === "NaN") {
+            alert("Preencha corretamente!");
+          } else if (note1 > 10 || note1 < 0 || note2 > 10 || note2 < 0) {
+            alert("Apenas nota entre 0 e 10!");
+          } else {
+            // Criação de mais uma linha na tabela:
+            document
+              .getElementsByTagName("tbody")[0]
+              .appendChild(document.createElement("tr")).innerHTML = `
+          <tr>
+            <td>${name}</td>
+            <td>${note1Show}</td>
+            <td>${note2Show}</td>
+            <td>${mediaShow}</td>
+            <td>${situacao}</td>
+          </tr>
+          `;
+
+            // Checagem se a media das notas existe e criação das medias das notas:
+            if (
+              document
+                .getElementsByTagName("tfoot")[0]
+                .getElementsByTagName("tr")[0]
+            ) {
+              document
+                .getElementsByTagName("tfoot")[0]
+                .getElementsByTagName("tr")[0]
+                .remove();
+            }
+            document
+              .getElementsByTagName("tfoot")[0]
+              .appendChild(document.createElement("tr")).innerHTML = `
+          <tr>
+            <td>Médias</td>
+            <td>${sumMedia1}</td>
+            <td>${sumMedia2}</td>
+            <td>${mediaTotal}</td>
+            <td>${aprovados}</td>
+          </tr>
+          `;
+          }
+
+          // Reset form:
+          document.getElementsByTagName("form")[0].reset();
+        };
+      };
+    </script>
+  </head>
+
+  <body>
+    <form>
+      <label for="nome">Nome do aluno</label>
+      <input id="nome" type="text" name="nome" required />
+      <label for="nota1">Nota 1</label>
+      <input
+        type="number"
+        id="nota1"
+        name="nota1"
+        min="0.0"
+        max="10.0"
+        step="0.1"
+        required
+      />
+      <label for="nota2">Nota 2</label>
+      <input
+        type="number"
+        id="nota2"
+        name="nota2"
+        min="0.0"
+        max="10.0"
+        step="0.1"
+        required
+      />
+      <button>Enviar</button>
+    </form>
+    <table class="w3-table w3-bordered">
+      <thead>
+        <tr>
+          <th>Aluno</th>
+          <th>Nota 1</th>
+          <th>Nota 2</th>
+          <th>Média</th>
+          <th>Situação</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot></tfoot>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <ul>
+      <li id="aumentar">Modificar fonte para 30px</li>
+      <li id="cor">Mudar a cor</li>
+      <li id="fundo">Fundo preto, texto branco</li>
+      <li id="aumentarCalc">Aumentar fonte em 5px</li>
+    </ul>
+
+    <p>Texto a ser modificado</p>
+
+    <script type="text/javascript">
+      document.getElementById("aumentar").onclick = function() {
+        var paragrafo = document.getElementsByTagName("p")[0];
+        paragrafo.style.fontSize = "30px";
+      };
+      document.getElementById("cor").onclick = function() {
+        var paragrafo = document.getElementsByTagName("p")[0];
+        paragrafo.style.color = "red";
+      };
+      document.getElementById("fundo").onclick = function() {
+        var paragrafo = document.getElementsByTagName("p")[0];
+        (paragrafo.style.background = "black"),
+          (paragrafo.style.color = "white");
+      };
+      document.getElementById("aumentarCalc").onclick = function() {
+        var paragrafo = document.getElementsByTagName("p")[0];
+        var tamFonte = getComputedStyle(paragrafo).fontSize;
+        var incrementaCinco = parseInt(tamFonte) + 5;
+        paragrafo.style.fontSize = incrementaCinco + "px";
+      };
+    </script>
+  </body>
+</html>

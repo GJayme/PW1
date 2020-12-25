@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <title>Aula 25-06 - Manipulação de elementos DOM</title>
+
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: black;
+        text-align: center;
+        display: block;
+        margin-top: 10px;
+        color: white;
+        font-size: 85px;
+      }
+
+      .vermelho {
+        color: red;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        var p = document.getElementsByTagName("p")[0];
+        document.getElementById("b1").onclick = function () {
+          p.innerText = "<b>Seja bem vindo!</b>"; //innerText joga tudo como string
+        };
+
+        document.getElementById("b2").onclick = function () {
+          p.innerHTML = "<b>IFSP rocks</b>"; //innerHTML pode colocar tag HTML
+        };
+
+        document.getElementById("b3").onclick = function () {
+          p.setAttribute("class", "vermelho"); //adiciona atributo na tag, ele não faz checagem
+        };
+
+        document.getElementById("b4").onclick = function () {
+          let valor = p.getAttribute("class"); //pega o valor do atributo, nesse caso o valor do atributo class
+          console.log(valor);
+        };
+
+        document.getElementById("b5").onclick = function () {
+          let tamanho = parseInt(getComputedStyle(p)["fontSize"]);
+          p.style.fontSize = tamanho + 10 + "px";
+        };
+
+        var numero_divs = 0;
+        document.getElementById("b6").onclick = function () {
+          let div = document.createElement("div"); //cria uma tag nova
+          div.append(numero_divs); //append coloca no final prepend coloca no começo
+          numero_divs++;
+
+          document.body.append(div);
+        };
+
+        document.getElementById("b7").onclick = function () {
+          let div = document.createElement("div");
+          div.append(numero_divs);
+          numero_divs++;
+
+          p.insertAdjacentElement("beforebegin", div);
+        };
+
+        document.getElementById("b8").onclick = function () {
+          let div = document.getElementsByTagName("div");
+          if (div.length > 0) {
+            div[div.length - 1].remove();
+            numero_divs--;
+          }
+        };
+
+        document.getElementById("b9").onclick = function () {
+          let valor = document.getElementsByTagName("input")[0].value;
+          console.log("O valor é: " + valor);
+        };
+      };
+    </script>
+  </head>
+
+  <body>
+    <button id="b1">Editar Text</button>
+    <button id="b2">Editar HTML</button>
+    <button id="b3">Editar Atributo</button>
+    <button id="b4">Imprimir Atributo</button>
+    <button id="b5">Inverter CSS</button>
+    <button id="b6">Adicionar Filho</button>
+    <button id="b7">Adicionar Irmão</button>
+    <button id="b8">Remover Filho</button>
+
+    <!-- beforebegin  -->
+    <p>
+      <!-- afterbeging -->
+      <!-- Conteudo real do elemento -->
+      <!-- beforeend -->
+    </p>
+    <!-- afterend -->
+
+    <button id="b9">Modificar FORM</button>
+    <input type="text" name="texto" />
+  </body>
+</html>

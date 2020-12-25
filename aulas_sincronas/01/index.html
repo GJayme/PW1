@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de testes</title>
+    <script type="text/javascript">
+      function fazAlgo(evento) {
+        let elemento = evento.target();
+        console.log("Cliquei em algo");
+      }
+      window.onload = function () {
+        // let primeiroBotao = document.getElementById("b1");
+        // primeiroBotao.onclick = function () {
+        //   console.log("Cliquei no primeiro botão");
+        // };
+
+        // let segundoBotao = document.getElementsByTagName("button")[1];
+        // segundoBotao.onclick = function () {
+        //   console.log("Cliquei no segundo botão");
+        // };
+
+        // let terceiroBotao = document.getElementsByClassName("botao")[2];
+        // terceiroBotao.onclick = function () {
+        //   console.log("Cliquei no terceiro botão");
+        // };
+
+        let botoes = document.getElementsByTagName("button");
+        for (let i = 0; i < botoes.length; i++) {
+          // botoes[i].onclick = fazAlgo();
+          botoes[i].addEventListener("mouseover", fazAlgo);
+        }
+
+        let a = document.getElementsByTagName("a")[0];
+        a.onclick = function (evento) {
+          evento.preventDefault();
+          console.log("Oi");
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <button id="b1" class="botao">Clique 1</button>
+    <button class="botao">Clique 2</button>
+    <button class="botao">Clique 3</button>
+    <a href="www.google.com.br">Link</a>
+  </body>
+</html>

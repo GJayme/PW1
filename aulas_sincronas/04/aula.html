@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <title>Aula 09/07</title>
+  <style>
+    .red {
+      color: red;
+      font-weight: 400;
+    }
+
+    .blue {
+      background-color: lightblue;
+      height: 50px;
+    }
+
+    .square {
+      height: 75px;
+      width: 75px;
+      margin: 5px;
+      display: inline-block;
+      background-color: magenta;
+    }
+  </style>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js">
+  </script>
+  <script>
+    var contador = 0;
+    $(document).ready(function () {
+
+      // CRIAR ALGO
+      $(document).on("click", "#criar", function () {
+        var elemento = $("<li>");// Criar um elemento novo em jQuery
+        elemento.text("Item " + contador); // edita conteudo textual do elemento
+        // elemento.html("Item " + contador); edita o conteúdo html do elemento
+        // elemento.attr("id", "liNovo"); colocando atributo
+        elemento.addClass("red");
+
+        // $("ul").append(elemento); Adiciona o elemento como ultimo elemento filho
+
+        $("ul").prepend(elemento); // Adiciona o elemento como primeiro
+        contador++;
+      });
+
+
+      // ADICIONAR IRMÃO
+      $(document).on("click", "#irmao", function () {
+        let elemento = $("<div>");
+        elemento.addClass("square");
+
+        let copia = elemento.clone(); // COPIA PROFUNDA - Ela copia tudo o que tiver dentro dele
+        $(".square").last().after(elemento); // Adiciona o novo elemento APOS os elementos selecionados
+
+        //$(".square").first().before(copia); Adiciona o novo elemento ANTES do elemento selecionados
+      });
+
+      // MOVER TITULO
+      $(document).on("click", "#titulo", function () {
+        let elemento = $("h2");
+        $(".blue").append(elemento);
+      });
+
+      // REMOVER
+      $(document).on("click", "#remover", function () {
+        $("li").remove(); // Remove todos os elemento li
+
+
+        $("div").remove(".square"); // Remove todos os elemento div que tenha classe .square | msm coisa que $("div.square").remove()
+
+        contador = 0;
+      });
+
+      // BOTAO INPUT
+      $("#botaoInput").click(function () {
+        let valor = $("[name=teste]").val()
+        console.log(valor);
+        $("[name=teste]").val("Semana que vem não tem aula");
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h2>Um bom título</h2>
+  <button id="criar">Criar algo!</button>
+  <button id="irmao">Adicionar irmão!</button>
+  <button id="titulo">Mover título</button>
+  <button id="remover">Remover</button>
+  <ul>
+  </ul>
+
+  <div class="square"></div>
+  <div class="blue"></div>
+  <br>
+  <input type="text" name="teste"><br>
+  <button id="botaoInput">Obter valor</button>
+</body>
+
+</html>

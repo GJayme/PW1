@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Importando JSON</title>
+    <!-- IMPORTANDO JQUERY -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <!-- SCRIPT -->
+
+    <script>
+      const tratandoDados = (dados) => {
+        $.each(dados, (indice) => {
+          console.log(dados[indice].nome);
+          $("tbody").append(`
+          <tr>
+            <td>${dados[indice].nome}</td>
+            <td>${dados[indice].fabricante}</td>
+            <td>${dados[indice].ano}</td>
+            <td>${dados[indice].potencia}</td>
+            <td>${dados[indice].preco}</td>
+            <td>${dados[indice].acessorios}</td>
+          </tr>`);
+        });
+      };
+
+      $(document).ready(() => {
+        $.getJSON(
+          "https://tiagoifsp.ddns.net/geral/carros.json",
+          tratandoDados
+        );
+      });
+    </script>
+  </head>
+
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Fabricante</th>
+          <th>Ano</th>
+          <th>Potência</th>
+          <th>Preço</th>
+          <th>Acessório</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </body>
+</html>
